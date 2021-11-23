@@ -5,14 +5,17 @@ import utils.RandomUtils;
 public class BaseBallGame {
 
     Scanner scanner = new Scanner(System.in);
+    GuessResult guessResult = new GuessResult(RandomUtils.nextInt(100, 1000)); // get random answer
+    GuessInput guessInput=new GuessInput();
+    int stop;
 
-
-    public BaseBallGame() {
+    BaseBallGame(int stop) {
+        this.stop = stop;
     }
 
-//    GuessInput
-//    while(init!=2){
+    public boolean playGame(){
 
+    }
 
 
     public boolean restartOrEnd(boolean result){
