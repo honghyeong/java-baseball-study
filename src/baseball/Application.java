@@ -4,9 +4,12 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args){
-        final Scanner scanner = new Scanner(System.in);
 
-        String input= scanner.next();
+        BaseBallGame baseBallGame = new BaseBallGame();
+
+        while(baseBallGame.restartOrEnd()){
+
+        }
 
     }
 }
