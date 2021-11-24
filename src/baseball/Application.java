@@ -8,8 +8,8 @@ public class Application {
         final Scanner scanner = new Scanner(System.in);
 
         System.out.println("게임 시작! 게임을 시작하려면 1, 종료하려면 2을 입력하세요.");
-        int stop= scanner.nextInt();
-        BaseBallGame baseBallGame = new BaseBallGame(stop);
+        int startStop= scanner.nextInt();
+        BaseBallGame baseBallGame = new BaseBallGame();
 
         while(baseBallGame.restartOrEnd()){
 
