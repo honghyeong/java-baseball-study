@@ -6,40 +6,35 @@ public class BaseBallGame {
 
     Scanner scanner = new Scanner(System.in);
     GuessInput guessInput=new GuessInput();
-    GuessResult guessResult = new GuessResult(RandomUtils.nextInt(100, 1000),guessInput.getInput()); // get random answer
-
-    int stop;
+    GuessResult guessResult = new GuessResult(RandomUtils.nextInt(100, 1000)); // get random answer
 
     BaseBallGame() {
     }
 
-//    public boolean playGame(){
-//
-//        int input=scanner.nextInt();
-//
-//        try {
-//            guessInput.setInput(input);
-//        }catch(e){
-//
-//        }
-//    }
+    public int playGame(){
+        int ballCount=0;
+        int strikeCount=0;
+        boolean flag=false;
+        int input=scanner.nextInt();
 
-
-    public boolean restartOrEnd(boolean result){
-
-        if(result){
-            System.out.println("3개의 숫자를 모두  맞히셨습니다! 게임 종료");
-            System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-            int input = scanner.nextInt();
-            if(input==1){
-                return true;
-            }else if(input==2){
-                return false;
-            }else {
-                throw new IllegalArgumentException();
+        while(!flag) {
+            try {
+                guessInput.setInput(input);
+            } catch (Exception e) {
+                System.out.println("잘못된 입력입니다. 100~999의 정수 숫자를 입력해주세요.");
+                input = scanner.nextInt();
             }
-        }
 
+            guessResult.setInput(input);
+            guessResult.getBallResult();
+            guessResult.getBallResult();
+
+            flag = guessResult.getFinalResult();
+
+        }
+        System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+        return scanner.nextInt();
     }
+
 
 }

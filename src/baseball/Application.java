@@ -9,10 +9,11 @@ public class Application {
 
         System.out.println("게임 시작! 게임을 시작하려면 1, 종료하려면 2을 입력하세요.");
         int startStop= scanner.nextInt();
-        BaseBallGame baseBallGame = new BaseBallGame();
 
-        while(baseBallGame.restartOrEnd()){
 
+        while(startStop==1){
+            BaseBallGame baseBallGame = new BaseBallGame();
+            startStop= baseBallGame.playGame();
         }
 
     }

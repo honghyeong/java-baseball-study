@@ -8,24 +8,32 @@ public class GuessResult {
 //    private int answer;
     private ArrayList<int[]> answerList = new ArrayList<int[]>();
     private ArrayList<int[]> inputList = new ArrayList<int[]>();
-    private int ballCount=0;
-    private int strikeCount=0;
+    private int ballCount;
+    private int strikeCount;
 
-    public GuessResult(int answer, int input) {
+    public GuessResult(int answer) {
         int tempAnswer=answer;
-        int tempInput=input;
+
         for(int i=0;i<3;i++){
             answerList.add(new int[]{tempAnswer%10,i}); // ex) 713 -> (key, value) = { 7:2, 1:1, 3:0 }
-            inputList.add(new int[]{tempInput%10,i});
             tempAnswer/=10;
-            tempInput/=10;
         }
 
-        this.ballCount=0;
-        this.strikeCount=0;
+        ballCount=0;
+        strikeCount=0;
+
     }
 
-    public int getBallResult(){
+    public void setInput(int input){
+        int tempInput=input;
+
+        for(int i=0;i<3;i++){
+            inputList.add(new int[]{tempInput%10,i});
+            tempInput/=10;
+        }
+    }
+
+    public void getBallResult(){
         int result=0;
         for(int i=0;i<3;i++){
             int value=answerList.get(i)[0];
@@ -33,10 +41,10 @@ public class GuessResult {
             Stream<int[]> stream = inputList.stream();
             result+=(int)stream.filter(e->e[0]==value).filter(e->e[1]!=index).count();
             }
-        return result;
+        this.ballCount=result;
 
     }
-    public int getStrikeResult(){
+    public void getStrikeResult(){
         int result=0;
         for(int i=0;i<3;i++){
             if((answerList.get(i)[0]==inputList.get(i)[0]) && answerList.get(i)[1]==inputList.get(i)[1]){
@@ -44,7 +52,29 @@ public class GuessResult {
             }
         }
 
-        return result;
+        this.strikeCount=result;
+    }
+
+    public boolean getFinalResult(){
+        if (strikeCount == 3) {
+            System.out.println("3스트라이크");
+            System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임종료");
+            return true;
+        } else if (ballCount + strikeCount == 0) {
+            System.out.println("낫싱");
+            return false;
+        } else {
+            String a = "";
+            if (ballCount > 0) {
+                a += String.format("%d볼 ", ballCount);
+            }
+            if (strikeCount > 0) {
+                a += String.format("%d스트라이크", strikeCount);
+            }
+            System.out.println(a);
+            return false;
+        }
+
     }
 
 }
